@@ -20,10 +20,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-
     <div class="container">
-    <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+      <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
     </div>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -35,13 +33,17 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <!-- <script src="scripts/controllers/doc-add.js"></script> -->
-        <!-- endbuild -->
-</body>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <!-- endbuild -->
+
+
+  </body>
 </html>

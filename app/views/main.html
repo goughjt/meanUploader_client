@@ -7,6 +7,13 @@
   ngf-accept="'.pdf'" ngf-max-size="10MB" ngf-min-height="100"
   ngf-resize="{width: 100, height: 100}">New PDF Conversion</button>
 
+<table class="table">
+  <tbody>
+    <tr ng-repeat="notification in notifications">
+      <td>{{ notification }}</td>
+    </tr>
+</table>
+
 <table class="table table-striped" >
   <thead>
     <th>Name</th>
@@ -27,5 +34,6 @@
           {{ doc.status }}
         </div>
       </td>
+    </tr>
   </tbody>
 </table>

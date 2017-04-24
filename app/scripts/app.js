@@ -10,7 +10,7 @@
  */
 angular
   .module('clientApp', [
-    'restangular', 'ngFileUpload'
+    'restangular', 'ngFileUpload', 'btford.socket-io'
   ])
   .config(function ( RestangularProvider){
     RestangularProvider.setBaseUrl('http://localhost:3000');
@@ -24,4 +24,15 @@ angular
   })
   .factory('Doc', function(DocRestangular) {
     return DocRestangular.service('doc');
+  }).
+  factory('mySocket', function (socketFactory) {
+    var myIoSocket = io.connect('http://localhost:3000');
+
+    var mySocket = socketFactory({
+      ioSocket: myIoSocket
+    });
+
+    mySocket.forward('message');
+
+    return mySocket;
   });
