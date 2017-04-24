@@ -2,4 +2,5 @@ The client half of an unstable testing ground for uploading files in the M.E.A.N
 
 To run:
 # $ npm install
+# $ bower install
 # $ npm start
