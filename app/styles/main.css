@@ -81,3 +81,13 @@ body {
     border-bottom: 0;
   }
 }
+
+#notification_area {
+  position: absolute;
+}
+
+.panel-notification {
+
+  opacity: 0.6;
+  width: 100px;
+}
