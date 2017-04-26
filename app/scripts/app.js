@@ -32,6 +32,8 @@ angular
       ioSocket: myIoSocket
     });
 
+    mySocket.forward('statusUpdate');
+    mySocket.forward('newDoc');
     mySocket.forward('message');
 
     return mySocket;

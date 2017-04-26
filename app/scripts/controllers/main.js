@@ -22,7 +22,7 @@ angular.module('clientApp')
         data: {file: file}
       }).then(function (resp) {
         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        $scope.docs = Doc.getList().$object;
+        /* $scope.docs = Doc.getList().$object;*/
       }, function (resp) {
         console.log('Error status: ' + resp.status);
       }, function (evt) {
@@ -34,9 +34,19 @@ angular.module('clientApp')
 
     $scope.notifications = [];
 
-    $scope.$on('socket:message', function (ev, data) {
-      $scope.notifications.push(data);
+    $scope.$on('socket:statusUpdate', function (ev, data) {
+      if(data && data.hashPath && data.status) {
+        for(var i=0, iLen = $scope.docs.length; i<iLen; i++){
+          if ($scope.docs[i].file_path == data.hashPath) {
+            $scope.docs[i].status = data.status;
+            $scope.notifications.push($scope.docs[i].name + ' is ' + $scope.docs[i].status);
+          }
+        }
+      }
+    });
 
+    $scope.$on('socket:newDoc', function (ev, data) {
+      $scope.docs = Doc.getList().$object;
     });
 
   });
