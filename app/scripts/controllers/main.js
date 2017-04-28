@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('MainCtrl', function (mySocket, Doc, Upload, $location, $scope) {
+  .controller('MainCtrl', function (mySocket, Doc, Upload, $scope) {
 
     $scope.docs = Doc.getList().$object;
 
@@ -16,18 +16,18 @@ angular.module('clientApp')
     $scope.file = {};
 
     $scope.uploadSingle = function (file) {
-      mySocket.emit('message', 'hi from uploading client');
+      /* mySocket.emit('message', 'hi from uploading client');*/
       Upload.upload({
         url: 'http://localhost:3000/doc',
         data: {file: file}
       }).then(function (resp) {
-        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        console.log('Success ' + resp.config.data.file_name + 'uploaded. Response: ' + resp.data);
         /* $scope.docs = Doc.getList().$object;*/
       }, function (resp) {
         console.log('Error status: ' + resp.status);
       }, function (evt) {
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file_name);
       });
 
     };
@@ -46,7 +46,7 @@ angular.module('clientApp')
     });
 
     $scope.$on('socket:newDoc', function (ev, data) {
-      $scope.docs = Doc.getList().$object;
+      $scope.docs.push(data);
     });
 
   });

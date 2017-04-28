@@ -24,8 +24,8 @@ angular
   })
   .factory('Doc', function(DocRestangular) {
     return DocRestangular.service('doc');
-  }).
-  factory('mySocket', function (socketFactory) {
+  })
+  .factory('mySocket', function (socketFactory) {
     var myIoSocket = io.connect('http://localhost:3000');
 
     var mySocket = socketFactory({
@@ -34,7 +34,6 @@ angular
 
     mySocket.forward('statusUpdate');
     mySocket.forward('newDoc');
-    mySocket.forward('message');
 
     return mySocket;
   });
