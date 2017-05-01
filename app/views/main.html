@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>Conversions</h1>
+ <img src="../images/413_small.png"/>
+	<h1>Conversions</h1>
 
   <button type="file" ngf-select="uploadSingle($file, $invalidFiles)" ngf-pattern="'.html'"
     ngf-accept="'.html'" ngf-max-size="10MB" ngf-min-height="100"
@@ -35,6 +36,6 @@
 
 <div id="notification_area">
   <div ng-repeat="notification in notifications.slice().reverse() | limitTo : 10 track by $index " class="panel panel-default panel-notification">
-    <div class="panel-body">{{ notification }}</div>
+    <div class="panel-body">{{ notification.timestamp | date: 'mediumTime'}} <br/> {{ notification.message }}</div>
   </div>
 </div>

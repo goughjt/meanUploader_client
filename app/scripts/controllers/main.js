@@ -10,19 +10,22 @@
 angular.module('clientApp')
   .controller('MainCtrl', function (mySocket, Doc, Upload, $scope) {
 
-    $scope.docs = Doc.getList().$object;
+    Doc.getList().then(
+      function(docs){
+        $scope.docs = docs;
+      }, function(errorResponse){
+        $scope.notifications.push('The server is unavailable. This app will not work.');
+      });
 
     /* see https://github.com/ghostbar/angular-file-model#user-content-known-issues*/
     $scope.file = {};
 
     $scope.uploadSingle = function (file) {
-      /* mySocket.emit('message', 'hi from uploading client');*/
       Upload.upload({
         url: 'http://localhost:3000/doc',
         data: {file: file}
       }).then(function (resp) {
-        console.log('Success ' + resp.config.data.file_name + 'uploaded. Response: ' + resp.data);
-        /* $scope.docs = Doc.getList().$object;*/
+        console.log('Success ' + resp.config.data.file_name + ' uploaded. Response: ' + resp.data);
       }, function (resp) {
         console.log('Error status: ' + resp.status);
       }, function (evt) {
@@ -39,7 +42,7 @@ angular.module('clientApp')
         for(var i=0, iLen = $scope.docs.length; i<iLen; i++){
           if ($scope.docs[i].file_path == data.hashPath) {
             $scope.docs[i].status = data.status;
-            $scope.notifications.push($scope.docs[i].name + ' is ' + $scope.docs[i].status);
+            $scope.notifications.push({message: $scope.docs[i].name + ' is ' + $scope.docs[i].status, timestamp: data.timestamp});
           }
         }
       }
