@@ -35,7 +35,7 @@
 </div>
 
 <div id="notification_area">
-  <div ng-repeat="notification in notifications.slice().reverse() | limitTo : 10 track by $index " class="panel panel-default panel-notification">
+  <div ng-repeat="notification in notifications.slice().reverse() | limitTo : 3 track by $index " class="panel panel-default panel-notification">
     <div class="panel-body">{{ notification.timestamp | date: 'mediumTime'}} <br/> {{ notification.message }}</div>
   </div>
 </div>
